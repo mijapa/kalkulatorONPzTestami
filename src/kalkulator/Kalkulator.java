@@ -22,8 +22,8 @@ public class Kalkulator {
         // liczby na switchu a operatory na switchu
         //
         //dodaj liczby ujemne
-        int o=0;
-        if(o == 0)
+        int o = 0;
+        if (o == 0)
             System.out.println("0 jest równe 0");
         Stos opStos = new Stos();
         Stos wyStos = new Stos();
@@ -43,7 +43,7 @@ public class Kalkulator {
                     case '(':
                         if (debug)
                             System.out.println("nawias otwierający - wrzucam");
-                        opStos.wrzuc(args[i].charAt(j));
+                        opStos.push(args[i].charAt(j));
                         break;
                     case ')':
                         if (debug)
@@ -51,9 +51,9 @@ public class Kalkulator {
                         if (debug)
                             System.out.println("wysokość stosuOperatorów: " + opStos.wysokosc());
                         while (!opStos.podejrzyj().equals("(")) {
-                            wyStos.wrzuc(opStos.zdejmij());
+                            wyStos.push(opStos.pop());
                         }
-                        opStos.zdejmij();
+                        opStos.pop();
                         break;
                     case '+':
                     case '-':
@@ -61,20 +61,20 @@ public class Kalkulator {
                             case "(":
                                 if (debug)
                                     System.out.println("na stosie operator o niższym priorytecie - wrzucam");
-                                opStos.wrzuc(args[i].charAt(j));
+                                opStos.push(args[i].charAt(j));
                                 break;
                             case "x":
                                 if (debug)
                                     System.out.println("stos operatorów pusty - wrzucam");
-                                opStos.wrzuc(args[i].charAt(j));
+                                opStos.push(args[i].charAt(j));
                                 break;
                             default:
                                 if (debug)
                                     System.out.println("zdejmuję ze stosu wszystkie operatory");
                                 while (opStos.wysokosc() != 0) {
-                                    wyStos.wrzuc(opStos.zdejmij());
+                                    wyStos.push(opStos.pop());
                                 }
-                                opStos.wrzuc(args[i].charAt(j));
+                                opStos.push(args[i].charAt(j));
                                 break;
                         }
                         break;
@@ -87,20 +87,20 @@ public class Kalkulator {
                             case "-":
                                 if (debug)
                                     System.out.println("na stosie operator o niższym priorytecie - wrzucam");
-                                opStos.wrzuc(args[i].charAt(j));
+                                opStos.push(args[i].charAt(j));
                                 break;
                             case "x":
                                 if (debug)
                                     System.out.println("stos operatorów pusty - wrzucam");
-                                opStos.wrzuc(args[i].charAt(j));
+                                opStos.push(args[i].charAt(j));
                                 break;
                             default:
                                 if (debug)
                                     System.out.println("zdejmuję ze stosu wszystkie operatory");
                                 while (opStos.wysokosc() != 0) {
-                                    wyStos.wrzuc(opStos.zdejmij());
+                                    wyStos.push(opStos.pop());
                                 }
-                                opStos.wrzuc(args[i].charAt(j));
+                                opStos.push(args[i].charAt(j));
                                 break;
                         }
                         break;
@@ -115,20 +115,20 @@ public class Kalkulator {
                             case "%":
                                 if (debug)
                                     System.out.println("na stosie operator o niższym priorytecie - wrzucam");
-                                opStos.wrzuc(args[i].charAt(j));
+                                opStos.push(args[i].charAt(j));
                                 break;
                             case "x":
                                 if (debug)
                                     System.out.println("stos operatorów pusty - wrzucam");
-                                opStos.wrzuc(args[i].charAt(j));
+                                opStos.push(args[i].charAt(j));
                                 break;
                             default:
                                 if (debug)
                                     System.out.println("zdejmuję ze stosu wszystkie operatory");
                                 while (opStos.wysokosc() != 0) {
-                                    wyStos.wrzuc(opStos.zdejmij());
+                                    wyStos.push(opStos.pop());
                                 }
-                                opStos.wrzuc(args[i].charAt(j));
+                                opStos.push(args[i].charAt(j));
                                 break;
                         }
                         break;
@@ -156,7 +156,7 @@ public class Kalkulator {
                                 System.out.println("teraz na górze stosu jest: " + wyStos.podejrzyj());
 
                         } else {
-                            wyStos.wrzuc(args[i].charAt(j));
+                            wyStos.push(args[i].charAt(j));
                             if (debug)
                                 System.out.println("jestem pojedynczą cyfrą - wrzucam na stos wyjściowy");
                         }
@@ -169,7 +169,7 @@ public class Kalkulator {
             }
             // = więc wszystko ze stosu operatorów na stosWyjściowy
             while (opStos.wysokosc() != 0) {
-                wyStos.wrzuc(opStos.zdejmij());
+                wyStos.push(opStos.pop());
             }
             if (debug)
                 System.out.println("stan stosuWyjściowego:");
@@ -190,65 +190,65 @@ public class Kalkulator {
             while (wyStos.wysokosc() > 0) {
                 switch (wyStos.podejrzyj()) {
                     case "+":
-                        wyStos.zdejmij();
-                        Double operand2 = Double.parseDouble(oblStos.zdejmij());
-                        Double operand1 = Double.parseDouble(oblStos.zdejmij());
+                        wyStos.pop();
+                        Double operand2 = Double.parseDouble(oblStos.pop());
+                        Double operand1 = Double.parseDouble(oblStos.pop());
                         if (debug)
                             System.out.println("dodaję pobrane operandy");
-                        oblStos.wrzuc(Double.toString(operand1 + operand2));
+                        oblStos.push(Double.toString(operand1 + operand2));
                         break;
                     case "-":
-                        wyStos.zdejmij();
-                        operand2 = Double.parseDouble(oblStos.zdejmij());
-                        operand1 = Double.parseDouble(oblStos.zdejmij());
+                        wyStos.pop();
+                        operand2 = Double.parseDouble(oblStos.pop());
+                        operand1 = Double.parseDouble(oblStos.pop());
                         if (debug)
                             System.out.println("odejmuję pobrane operandy");
-                        oblStos.wrzuc(Double.toString(operand1 - operand2));
+                        oblStos.push(Double.toString(operand1 - operand2));
                         break;
                     case "*":
-                        wyStos.zdejmij();
-                        operand2 = Double.parseDouble(oblStos.zdejmij());
-                        operand1 = Double.parseDouble(oblStos.zdejmij());
+                        wyStos.pop();
+                        operand2 = Double.parseDouble(oblStos.pop());
+                        operand1 = Double.parseDouble(oblStos.pop());
                         if (debug)
                             System.out.println("mnożę pobrane operandy");
-                        oblStos.wrzuc(Double.toString(operand1 * operand2));
+                        oblStos.push(Double.toString(operand1 * operand2));
                         break;
                     case "/":
-                        wyStos.zdejmij();
-                        operand2 = Double.parseDouble(oblStos.zdejmij());
-                        operand1 = Double.parseDouble(oblStos.zdejmij());
+                        wyStos.pop();
+                        operand2 = Double.parseDouble(oblStos.pop());
+                        operand1 = Double.parseDouble(oblStos.pop());
                         if (debug)
                             System.out.println("dzięlę pobrane operandy");
-                        oblStos.wrzuc(Double.toString(operand1 / operand2));
+                        oblStos.push(Double.toString(operand1 / operand2));
                         break;
                     case "^":
-                        wyStos.zdejmij();
-                        operand2 = Double.parseDouble(oblStos.zdejmij());
-                        operand1 = Double.parseDouble(oblStos.zdejmij());
+                        wyStos.pop();
+                        operand2 = Double.parseDouble(oblStos.pop());
+                        operand1 = Double.parseDouble(oblStos.pop());
                         if (debug)
                             System.out.println("podnosze do potęgi pobrane operandy");
-                        oblStos.wrzuc(Double.toString(Math.pow(operand1, operand2)));
+                        oblStos.push(Double.toString(Math.pow(operand1, operand2)));
                         break;
                     case "&":
-                        wyStos.zdejmij();
-                        operand2 = Double.parseDouble(oblStos.zdejmij());
-                        operand1 = Double.parseDouble(oblStos.zdejmij());
+                        wyStos.pop();
+                        operand2 = Double.parseDouble(oblStos.pop());
+                        operand1 = Double.parseDouble(oblStos.pop());
                         if (debug)
                             System.out.println("pierwiastkuję pobrane operandy");
-                        oblStos.wrzuc(Double.toString(Math.pow(operand1, 1 / operand2)));
+                        oblStos.push(Double.toString(Math.pow(operand1, 1 / operand2)));
                         break;
                     case "%":
-                        wyStos.zdejmij();
-                        operand2 = Double.parseDouble(oblStos.zdejmij());
-                        operand1 = Double.parseDouble(oblStos.zdejmij());
+                        wyStos.pop();
+                        operand2 = Double.parseDouble(oblStos.pop());
+                        operand1 = Double.parseDouble(oblStos.pop());
                         if (debug)
                             System.out.println("modulo pobrane operandy");
-                        oblStos.wrzuc(Double.toString(operand1 % operand2));
+                        oblStos.push(Double.toString(operand1 % operand2));
                         break;
                     default:
                         if (debug)
                             System.out.println("wrzucam liczbę na stos obliczeniowy");
-                        oblStos.wrzuc(wyStos.zdejmij());
+                        oblStos.push(wyStos.pop());
                         if (debug)
                             wyStos.wyswietl();
                         if (debug)
@@ -256,13 +256,13 @@ public class Kalkulator {
                         break;
                 }
                 if (debug)
-                    System.out.println("");
+                    System.out.println();
                 if (debug)
                     System.out.println("stan stosuObliczeniowego:");
                 if (debug)
                     oblStos.wyswietl();
                 if (debug)
-                    System.out.println("");
+                    System.out.println();
             }
             System.out.println(oblStos.podejrzyj());
             i++;
@@ -273,53 +273,3 @@ public class Kalkulator {
 
 }
 
-class Stos {
-    int pierwszyWolny = 0;
-    String stos[] = new String[100];
-
-    public void wrzuc(char naStos) {
-        stos[pierwszyWolny++] = "" + naStos;
-    }
-
-    public void wrzuc(String naStos) {
-        stos[pierwszyWolny++] = naStos;
-    }
-
-    public String zdejmij() {
-        return stos[--pierwszyWolny];
-    }
-
-    public String podejrzyj() {
-        if (pierwszyWolny > 0)
-            return stos[pierwszyWolny - 1];
-        else
-            return "x";
-    }
-
-    public void rozszerz(char poszerzajacy) {
-        stos[pierwszyWolny - 1] += poszerzajacy;
-    }
-
-    public int wysokosc() {
-        return pierwszyWolny;
-    }
-
-    public void odwroc() {
-        Stos temp = new Stos();
-        Stos temp2 = new Stos();
-        while (this.wysokosc() > 0) {
-            temp.wrzuc(this.zdejmij());
-        }
-        while (temp.wysokosc() > 0) {
-            temp2.wrzuc(temp.zdejmij());
-        }
-        while (temp2.wysokosc() > 0) {
-            this.wrzuc(temp2.zdejmij());
-        }
-    }
-
-    public void wyswietl() {
-        for (int i = pierwszyWolny - 1; i >= 0; i--)
-            System.out.println(stos[i]);
-    }
-}
