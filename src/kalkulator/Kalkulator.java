@@ -3,33 +3,17 @@ package kalkulator;
 public class Kalkulator {
 
     public static void main(String[] args) {
-        //mała zmiana
+        Kalkulator kalkulator = new Kalkulator();
+        System.out.println(kalkulator.oblicz(args));
 
-        // Double d=2.5 + Double.parseDouble(args[1]);
-        // System.out.println(d);
-        //
-        // tablica stringów
-        //
-        //
-        // String temp ="adklajd";
-        // System.out.println(temp.charAt(0));
-        // System.out.println(temp.length());
-        // String str[] = new String[10];
-        // int szczytStosu = 0;
-        //
-        // funkcja endsWitch do sprawdzania co jest na końcu stringa, jeśli brakuje =
-        // wyświetl komunikat o błędzie
-        // liczby na switchu a operatory na switchu
-        //
-        //dodaj liczby ujemne
-        int o = 0;
-        if (o == 0)
-            System.out.println("0 jest równe 0");
+    }
+
+    public String oblicz(String[] args) {
         Stos opStos = new Stos();
         Stos wyStos = new Stos();
         int i = 0;// numer wiersza z argumentami
         int j = 0;
-        boolean debug = true;
+        boolean debug = false;
         while (i < args.length) {
             if (!args[i].endsWith("=")) {
                 System.out.println("błędne dane: " + args[i]);
@@ -265,10 +249,12 @@ public class Kalkulator {
                     System.out.println();
             }
             System.out.println(oblStos.podejrzyj());
-            i++;
-            j = 0;
+            return (oblStos.podejrzyj());
+//            i++;
+//            j = 0;
         }
 
+        return null;
     }
 
 }
