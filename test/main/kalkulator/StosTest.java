@@ -1,5 +1,7 @@
-package kalkulator;
+package test.kalkulator;
 
+import main.kalkulator.Stos;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,7 +14,7 @@ class StosTest {
         //when
 
         //Then
-        assertTrue(stos.isEmpty());
+        Assertions.assertTrue(stos.isEmpty());
         assertThrows(IndexOutOfBoundsException.class, () -> stos.top());
         assertThrows(IndexOutOfBoundsException.class, () -> stos.pop());
     }
@@ -27,10 +29,10 @@ class StosTest {
         String expected = "3";
         stos.push(expected);
         //Then
-        assertEquals(expected, stos.top());
-        assertEquals(expected, stos.top());
-        assertEquals(expected, stos.top());
-        assertFalse(stos.isEmpty());
+        Assertions.assertEquals(expected, stos.top());
+        Assertions.assertEquals(expected, stos.top());
+        Assertions.assertEquals(expected, stos.top());
+        Assertions.assertFalse(stos.isEmpty());
     }
 
     @Test
@@ -42,7 +44,7 @@ class StosTest {
         stos.push(expected);
         //Then
         assertSame(expected, stos.pop());
-        assertTrue(stos.isEmpty());
+        Assertions.assertTrue(stos.isEmpty());
         assertThrows(IndexOutOfBoundsException.class, () -> stos.pop());
     }
 
@@ -61,7 +63,7 @@ class StosTest {
         assertSame(third, stos.pop());
         assertSame(second, stos.pop());
         assertSame(first, stos.pop());
-        assertTrue(stos.isEmpty());
+        Assertions.assertTrue(stos.isEmpty());
         assertThrows(IndexOutOfBoundsException.class, () -> stos.pop());
     }
 
@@ -74,7 +76,7 @@ class StosTest {
         stos.push(expected);
         //Then
         assertNull(stos.pop());
-        assertTrue(stos.isEmpty());
+        Assertions.assertTrue(stos.isEmpty());
         assertThrows(IndexOutOfBoundsException.class, () -> stos.pop());
     }
 
@@ -91,7 +93,7 @@ class StosTest {
         stos.push(expected);
         //Then
         assertSame(expected, stos.pop());
-        assertTrue(stos.isEmpty());
+        Assertions.assertTrue(stos.isEmpty());
         assertThrows(IndexOutOfBoundsException.class, () -> stos.pop());
     }
 }

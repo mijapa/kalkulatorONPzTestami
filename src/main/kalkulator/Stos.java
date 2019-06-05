@@ -1,4 +1,4 @@
-package kalkulator;
+package main.kalkulator;
 
 public class Stos {
     int pierwszyWolny = 0;
