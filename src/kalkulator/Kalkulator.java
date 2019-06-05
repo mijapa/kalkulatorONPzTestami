@@ -9,6 +9,7 @@ public class Kalkulator {
     }
 
     public String oblicz(String[] args) {
+        if (args == null) throw new IllegalArgumentException();
         Stos opStos = new Stos();
         Stos wyStos = new Stos();
         int i = 0;// numer wiersza z argumentami
@@ -17,8 +18,9 @@ public class Kalkulator {
         while (i < args.length) {
             if (!args[i].endsWith("=")) {
                 System.out.println("błędne dane: " + args[i]);
-                i++;
-                continue;
+                throw new IllegalArgumentException();
+//                i++;
+//                continue;
             }
             System.out.print(args[i]);
 
