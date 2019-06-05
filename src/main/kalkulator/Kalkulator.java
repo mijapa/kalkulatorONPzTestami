@@ -17,12 +17,12 @@ public class Kalkulator {
         boolean debug = false;
         while (i < args.length) {
             if (!args[i].endsWith("=")) {
-                System.out.println("błędne dane: " + args[i]);
+//                System.out.println("błędne dane: " + args[i]);
                 throw new IllegalArgumentException();
 //                i++;
 //                continue;
             }
-            System.out.print(args[i]);
+//            System.out.print(args[i]);
 
             while (args[i].charAt(j) != '=') {
                 switch (args[i].charAt(j)) {
@@ -250,7 +250,7 @@ public class Kalkulator {
                 if (debug)
                     System.out.println();
             }
-            System.out.println(oblStos.podejrzyj());
+//            System.out.println(oblStos.podejrzyj());
             return (oblStos.podejrzyj());
 //            i++;
 //            j = 0;
